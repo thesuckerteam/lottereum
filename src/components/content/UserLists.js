@@ -1,6 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
+import web3 from "../../web3";
+import lottery from "../../lottery";
+import contractInfo from "../../config/contract";
 
 const data = [];
 
@@ -95,7 +98,42 @@ const styles = StyleSheet.create({
 	},
 });
 
-class TodayTrendsComponent extends React.Component {
+export default class TodayTrendsComponent extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			manager: "",
+			players: [],
+			balance: "",
+			balanceEther: "",
+			value: "",
+			message: "",
+			isMetaMaskPluginAvailable: false,
+			isTransactionIsRunning: false,
+			startWarning: false,
+			errorMessage: "",
+		};
+	}
+
+	async componentDidMount() {
+		const isMetaMaskPluginAvailable = web3 && lottery;
+		this.setState({ isMetaMaskPluginAvailable });
+		console.log("Account: ", await web3.eth.getAccounts());
+		this.updateContractInfo();
+	}
+
+	updateContractInfo = async () => {
+		try {
+			const manager = await lottery.methods.manager().call();
+			const players = await lottery.methods.getPlayers().call();
+			const balanceWei = await web3.eth.getBalance(lottery.options.address);
+			const balanceEther = await web3.utils.fromWei(balanceWei, "ether");
+			this.setState({ manager, players, balance: balanceWei, balanceEther });
+		} catch (error) {
+			alert(error);
+		}
+	};
+
 	renderLegend(color, title) {
 		return (
 			<Row vertical='center'>
@@ -120,6 +158,20 @@ class TodayTrendsComponent extends React.Component {
 	}
 
 	render() {
+		const {
+			isMetaMaskPluginAvailable,
+			manager,
+			players,
+			balance,
+			balanceEther,
+		} = this.state;
+
+		console.log("Metamask: ", isMetaMaskPluginAvailable);
+		console.log("Manager: ", manager);
+		console.log("Player: ", players);
+		console.log("Balance: ", balance);
+		console.log("BalanceEther: ", balanceEther);
+
 		return (
 			<Row
 				flexGrow={1}
@@ -164,5 +216,3 @@ class TodayTrendsComponent extends React.Component {
 		);
 	}
 }
-
-export default TodayTrendsComponent;

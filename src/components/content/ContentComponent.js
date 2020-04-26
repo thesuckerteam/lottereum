@@ -3,9 +3,6 @@ import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite/no-important";
 import MiniCardComponent from "./MiniCardComponent";
 import TodayTrendsComponent from "./UserLists";
-import web3 from "../../web3";
-import lottery from "../../lottery";
-import contractInfo from "../../config/contract";
 
 const styles = StyleSheet.create({
 	cardsContainer: {
@@ -47,37 +44,6 @@ const styles = StyleSheet.create({
 });
 
 export default class ContentComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			manager: "",
-			players: [],
-			balance: "",
-			balanceEther: "",
-			value: "",
-			message: "",
-			isMetaMaskPluginAvailable: false,
-			isTransactionIsRunning: false,
-			startWarning: false,
-			errorMessage: "",
-		};
-	}
-
-	async componentDidMount() {
-		const isMetaMaskPluginAvailable = web3 && lottery;
-		this.setState({ isMetaMaskPluginAvailable });
-		this.updateContractInfo();
-	}
-
-	async updateContractInfo() {
-		fetch("/api/contract-info")
-			.then((res) => res.json())
-			.then(({ manager, players, balanceWei: balance, balanceEther }) => {
-				this.setState({ manager, players, balance, balanceEther });
-			})
-			.catch(console.log);
-	}
-
 	render() {
 		return (
 			<Column>
