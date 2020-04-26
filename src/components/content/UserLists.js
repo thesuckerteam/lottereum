@@ -141,6 +141,75 @@ export default class TodayTrendsComponent extends Component {
 		}
 	};
 
+	handleOnSubmit = async (event) => {
+		event.preventDefault();
+		this.setState({ errorMessage: "" });
+		const { isMetaMaskPluginAvailable, value } = this.state;
+
+		if (!isMetaMaskPluginAvailable) {
+			return this.metaMaskNotAvailable();
+		}
+
+		await window.ethereum.enable();
+		const accounts = await web3.eth.getAccounts();
+		this.setState({
+			message: "Transaction is processing. This might take 12 to 30 seconds.",
+			isTransactionIsRunning: true,
+		});
+
+		try {
+			await lottery.methods.enter().send({
+				from: accounts[0],
+				value: web3.utils.toWei(value, "ether"),
+			});
+			this.updateContractInfo();
+			this.setState({
+				message: "You entered to the lottery",
+				value: "",
+			});
+		} catch (err) {
+			this.setState({
+				errorMessage: err.message,
+			});
+		}
+
+		this.setState({ isTransactionIsRunning: false });
+	};
+
+	handleOnClickPickWinner = async (event) => {
+		event.preventDefault();
+		
+		const { isMetaMaskPluginAvailable } = this.state;
+		if (!isMetaMaskPluginAvailable) {
+			return this.metaMaskNotAvailable();
+		}
+
+		await window.ethereum.enable();
+		const accounts = await web3.eth.getAccounts();
+		this.setState({
+			message: "Transaction is processing. This might take 9 to 15 seconds.",
+			isTransactionIsRunning: true,
+		});
+
+		try {
+			await lottery.methods.pickWinner().send({
+				from: accounts[0],
+			});
+		} catch (ex) {}
+
+		this.setState({
+			message: "Winner picked",
+		});
+
+		this.setState({ isTransactionIsRunning: false });
+	};
+
+	metaMaskNotAvailable = () => {
+		this.setState({
+			startWarning: true,
+		});
+	};
+
 	renderLegend(color, title) {
 		return (
 			<Row vertical='center'>
@@ -209,9 +278,7 @@ export default class TodayTrendsComponent extends Component {
 							<input
 								type='submit'
 								value='Submit'
-								onClick={() => {
-									alert(this.state.value);
-								}}
+								onClick={this.handleOnSubmit}
 							/>
 						</form>
 					</h1>
