@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
 import web3 from "../../web3";
-import lottery from "../../lottery";
+import lottery from "../../lotteryContract";
 import contractInfo from "../../config/contract";
 
 const data = [];
@@ -112,12 +112,13 @@ export default class TodayTrendsComponent extends Component {
 			isTransactionIsRunning: false,
 			startWarning: false,
 			errorMessage: "",
+			isLoading: true,
 		};
 	}
 
 	async componentDidMount() {
 		const isMetaMaskPluginAvailable = web3 && lottery;
-		this.setState({ isMetaMaskPluginAvailable });
+		this.setState({ isMetaMaskPluginAvailable, isLoading: true });
 		console.log("Account: ", await web3.eth.getAccounts());
 		this.updateContractInfo();
 	}
@@ -128,7 +129,13 @@ export default class TodayTrendsComponent extends Component {
 			const players = await lottery.methods.getPlayers().call();
 			const balanceWei = await web3.eth.getBalance(lottery.options.address);
 			const balanceEther = await web3.utils.fromWei(balanceWei, "ether");
-			this.setState({ manager, players, balance: balanceWei, balanceEther });
+			this.setState({
+				manager,
+				players,
+				balance: balanceWei,
+				balanceEther,
+				isLoading: false,
+			});
 		} catch (error) {
 			alert(error);
 		}
@@ -151,8 +158,8 @@ export default class TodayTrendsComponent extends Component {
 				className={css(styles.statContainer)}
 				vertical='center'
 				horizontal='center'>
-				<span className={css(styles.statTitle)}>{title}</span>
-				<span className={css(styles.statValue)}>{value}</span>
+				<span className={css(styles.statTitle)}>Player Number: {title}</span>
+				<span className={css(styles.statValue)}>Address: {value}</span>
 			</Column>
 		);
 	}
@@ -164,6 +171,7 @@ export default class TodayTrendsComponent extends Component {
 			players,
 			balance,
 			balanceEther,
+			isLoading,
 		} = this.state;
 
 		console.log("Metamask: ", isMetaMaskPluginAvailable);
@@ -190,9 +198,21 @@ export default class TodayTrendsComponent extends Component {
 						<form>
 							<label>
 								Lottery Number:
-								<input type='text' name='name' />
+								<input
+									onChange={(event) =>
+										this.setState({ value: event.target.value })
+									}
+									type='text'
+									name='name'
+								/>
 							</label>
-							<input type='submit' value='Submit' />
+							<input
+								type='submit'
+								value='Submit'
+								onClick={() => {
+									alert(this.state.value);
+								}}
+							/>
 						</form>
 					</h1>
 				</Column>
@@ -205,12 +225,8 @@ export default class TodayTrendsComponent extends Component {
 					flexGrow={3}
 					flexBasis='342px'
 					breakpoints={{ 1024: css(styles.stats) }}>
-					{this.renderStat("Kittin V.", "user: #0001 lottery: 665781")}
-					{this.renderStat("Vichaphol T.", "user: #0002 lottery: 123456")}
-					{this.renderStat("Piyavat S.", "user: #0003 lottery: 987654")}
-					{this.renderStat("Korawit R.", "user: #0004 lottery: 333555")}
-					{this.renderStat("Narisa S.", "user: #0005 lottery: 129453")}
-					{this.renderStat("Tanasorn T.", "user: #0006 lottery: 776241")}
+					{isLoading === false &&
+						players.map((player, index) => this.renderStat(index + 1, player))}
 				</Column>
 			</Row>
 		);
