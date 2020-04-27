@@ -4,6 +4,7 @@ import { StyleSheet, css } from "aphrodite";
 import web3 from "../../web3";
 import lottery from "../../lotteryContract";
 import contractInfo from "../../config/contract";
+import LoadingOverlay from "react-loading-overlay";
 
 const data = [];
 
@@ -155,6 +156,7 @@ export default class TodayTrendsComponent extends Component {
 		this.setState({
 			message: "Transaction is processing. This might take 12 to 30 seconds.",
 			isTransactionIsRunning: true,
+			isLoading: true,
 		});
 
 		try {
@@ -173,12 +175,12 @@ export default class TodayTrendsComponent extends Component {
 			});
 		}
 
-		this.setState({ isTransactionIsRunning: false });
+		this.setState({ isTransactionIsRunning: false, isLoading: false });
 	};
 
-	handleOnClickPickWinner = async (event) => {
+	handleOnPickWinner = async (event) => {
 		event.preventDefault();
-		
+
 		const { isMetaMaskPluginAvailable } = this.state;
 		if (!isMetaMaskPluginAvailable) {
 			return this.metaMaskNotAvailable();
@@ -189,6 +191,7 @@ export default class TodayTrendsComponent extends Component {
 		this.setState({
 			message: "Transaction is processing. This might take 9 to 15 seconds.",
 			isTransactionIsRunning: true,
+			isLoading: true,
 		});
 
 		try {
@@ -201,7 +204,7 @@ export default class TodayTrendsComponent extends Component {
 			message: "Winner picked",
 		});
 
-		this.setState({ isTransactionIsRunning: false });
+		this.setState({ isTransactionIsRunning: false, isLoading: false });
 	};
 
 	metaMaskNotAvailable = () => {
@@ -241,6 +244,8 @@ export default class TodayTrendsComponent extends Component {
 			balance,
 			balanceEther,
 			isLoading,
+			isTransactionIsRunning,
+			message,
 		} = this.state;
 
 		console.log("Metamask: ", isMetaMaskPluginAvailable);
@@ -250,52 +255,61 @@ export default class TodayTrendsComponent extends Component {
 		console.log("BalanceEther: ", balanceEther);
 
 		return (
-			<Row
-				flexGrow={1}
-				className={css(styles.container)}
-				horizontal='center'
-				breakpoints={{ 1024: "column" }}>
-				<Column
-					wrap
-					flexGrow={7}
-					flexBasis='735px'
-					className={css(styles.graphSection)}
-					breakpoints={{
-						1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
-					}}>
-					<h1>
-						<form>
-							<label>
-								Lottery Number:
+			<LoadingOverlay active={isTransactionIsRunning} spinner text={message}>
+				<Row
+					flexGrow={1}
+					className={css(styles.container)}
+					horizontal='center'
+					breakpoints={{ 1024: "column" }}>
+					<Column
+						wrap
+						flexGrow={7}
+						flexBasis='735px'
+						className={css(styles.graphSection)}
+						breakpoints={{
+							1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
+						}}>
+						<h1>
+							<form>
+								<label>
+									Lottery Number:
+									<input
+										onChange={(event) =>
+											this.setState({ value: event.target.value })
+										}
+										type='text'
+										name='name'
+									/>
+								</label>
 								<input
-									onChange={(event) =>
-										this.setState({ value: event.target.value })
-									}
-									type='text'
-									name='name'
+									type='submit'
+									value='Submit'
+									onClick={this.handleOnSubmit}
 								/>
-							</label>
-							<input
-								type='submit'
-								value='Submit'
-								onClick={this.handleOnSubmit}
-							/>
-						</form>
-					</h1>
-				</Column>
-				<Column
-					className={css(styles.separator)}
-					breakpoints={{ 1024: { display: "none" } }}>
-					<div />
-				</Column>
-				<Column
-					flexGrow={3}
-					flexBasis='342px'
-					breakpoints={{ 1024: css(styles.stats) }}>
-					{isLoading === false &&
-						players.map((player, index) => this.renderStat(index + 1, player))}
-				</Column>
-			</Row>
+								<input
+									type='submit'
+									value='Pick A Winner'
+									onClick={this.handleOnPickWinner}
+								/>
+							</form>
+						</h1>
+					</Column>
+					<Column
+						className={css(styles.separator)}
+						breakpoints={{ 1024: { display: "none" } }}>
+						<div />
+					</Column>
+					<Column
+						flexGrow={3}
+						flexBasis='342px'
+						breakpoints={{ 1024: css(styles.stats) }}>
+						{isLoading ||
+							players.map((player, index) =>
+								this.renderStat(index + 1, player)
+							)}
+					</Column>
+				</Row>
+			</LoadingOverlay>
 		);
 	}
 }
