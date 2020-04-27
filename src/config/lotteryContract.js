@@ -1,5 +1,5 @@
 import web3 from "./web3";
-import contractInfo from "./config/contract";
+import contractInfo from "./contract";
 
 const address = contractInfo.contractAddress;
 const abi = contractInfo.contractAbi;

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
-import web3 from "../../web3";
-import lottery from "../../lotteryContract";
-import contractInfo from "../../config/contract";
+import web3 from "../../config/web3";
+import lottery from "../../config/lotteryContract";
 import LoadingOverlay from "react-loading-overlay";
 
 const data = [];
