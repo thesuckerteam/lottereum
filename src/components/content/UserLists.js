@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
 import web3 from "../../config/web3";
-import lottery from "../../config/lotteryContract";
+import lottery from "../../config/lottery";
 import LoadingOverlay from "react-loading-overlay";
 
 const data = [];
@@ -180,7 +180,7 @@ export default class TodayTrendsComponent extends Component {
 	handleOnPickWinner = async (event) => {
 		event.preventDefault();
 
-		const { isMetaMaskPluginAvailable } = this.state;
+		const { isMetaMaskPluginAvailable, balanceEther } = this.state;
 		if (!isMetaMaskPluginAvailable) {
 			return this.metaMaskNotAvailable();
 		}
@@ -198,12 +198,9 @@ export default class TodayTrendsComponent extends Component {
 				from: accounts[0],
 			});
 		} catch (ex) {}
-
-		this.setState({
-			message: "Winner picked",
-		});
-
-		this.setState({ isTransactionIsRunning: false, isLoading: false });
+		const winner = await lottery.methods.winner().call();
+		alert(`The winner is ${winner}, wins ${balanceEther} ether`);
+		this.setState({ isTransactionIsRunning: false, balanceEther: 0 });
 	};
 
 	metaMaskNotAvailable = () => {
@@ -290,6 +287,7 @@ export default class TodayTrendsComponent extends Component {
 									value='Pick A Winner'
 									onClick={this.handleOnPickWinner}
 								/>
+								<div>Total price: {this.state.balanceEther}</div>
 							</form>
 						</h1>
 					</Column>
