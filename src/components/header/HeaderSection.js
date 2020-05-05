@@ -1,6 +1,4 @@
 import React from "react";
-import { string } from "prop-types";
-import { Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
 import IconSearch from "../../assets/icon-search";
 import IconBellNew from "../../assets/icon-bell-new";
@@ -65,13 +63,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-function HeaderSection(props) {
+export default function HeaderSection(props) {
 	const { icon, title, ...otherProps } = props;
 	return <h1>Lottereum</h1>;
 }
-
-HeaderSection.propTypes = {
-	title: string,
-};
-
-export default HeaderSection;

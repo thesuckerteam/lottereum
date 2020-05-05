@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-class CardComponent extends React.Component {
+export default class CardComponent extends React.Component {
 	renderItem(item, index) {
 		return (
 			<Column
@@ -113,4 +113,3 @@ class CardComponent extends React.Component {
 	}
 }
 
-export default CardComponent;
