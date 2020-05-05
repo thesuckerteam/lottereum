@@ -4,6 +4,7 @@ import { StyleSheet, css } from "aphrodite";
 import web3 from "../../config/web3";
 import lottery from "../../config/lottery";
 import LoadingOverlay from "react-loading-overlay";
+import PlayerCard from "./PlayerCard";
 
 const data = [];
 
@@ -62,43 +63,13 @@ const styles = StyleSheet.create({
 		width: 1,
 		minWidth: 1,
 	},
-	statContainer: {
-		borderBottom: "1px solid #DFE0EB",
-		padding: "24px 32px 24px 32px",
-		height: "calc(114px - 48px)",
-		":last-child": {
-			border: "none",
-		},
-	},
 	stats: {
 		borderTop: "1px solid #DFE0EB",
 		width: "100%",
 	},
-	statTitle: {
-		fontFamily: "Muli",
-		fontStyle: "normal",
-		fontWeight: "600",
-		fontSize: 16,
-		lineHeight: "22px",
-		letterSpacing: "0.3px",
-		textAlign: "center",
-		color: "#9FA2B4",
-		whiteSpace: "nowrap",
-		marginBottom: 6,
-	},
-	statValue: {
-		fontFamily: "Muli",
-		fontStyle: "normal",
-		fontWeight: "bold",
-		fontSize: 24,
-		lineHeight: "30px",
-		letterSpacing: "0.3px",
-		textAlign: "center",
-		color: "#252733",
-	},
 });
 
-export default class TodayTrendsComponent extends Component {
+export default class MainContent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -219,19 +190,6 @@ export default class TodayTrendsComponent extends Component {
 		);
 	}
 
-	renderStat(title, value) {
-		return (
-			<Column
-				flexGrow={1}
-				className={css(styles.statContainer)}
-				vertical='center'
-				horizontal='center'>
-				<span className={css(styles.statTitle)}>Player Number: {title}</span>
-				<span className={css(styles.statValue)}>Address: {value}</span>
-			</Column>
-		);
-	}
-
 	render() {
 		const {
 			isMetaMaskPluginAvailable,
@@ -301,9 +259,9 @@ export default class TodayTrendsComponent extends Component {
 						flexBasis='342px'
 						breakpoints={{ 1024: css(styles.stats) }}>
 						{isLoading ||
-							players.map((player, index) =>
-								this.renderStat(index + 1, player)
-							)}
+							players.map((address, index) => (
+								<PlayerCard number={index + 1} address={address} />
+							))}
 					</Column>
 				</Row>
 			</LoadingOverlay>

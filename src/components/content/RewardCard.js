@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-function MiniCardComponent({ className = "", title, value }) {
+export default function RewardCard({ className = "", title, value }) {
 	const composedClassName = `${css(styles.container)} ${className}`;
 	return (
 		<Column
@@ -55,5 +55,3 @@ function MiniCardComponent({ className = "", title, value }) {
 		</Column>
 	);
 }
-
-export default MiniCardComponent;

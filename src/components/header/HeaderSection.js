@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
 	},
 });
 
-function HeaderComponent(props) {
+function HeaderSection(props) {
 	const { icon, title, ...otherProps } = props;
 	return <h1>Lottereum</h1>;
 }
 
-HeaderComponent.propTypes = {
+HeaderSection.propTypes = {
 	title: string,
 };
 
-export default HeaderComponent;
+export default HeaderSection;

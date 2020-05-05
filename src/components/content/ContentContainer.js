@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite/no-important";
-import MiniCardComponent from "./MiniCardComponent";
-import TodayTrendsComponent from "./UserLists";
+import RewardCard from "./RewardCard";
+import MainContent from "./MainContent";
 
 const styles = StyleSheet.create({
 	cardsContainer: {
@@ -59,42 +59,42 @@ export default class ContentComponent extends Component {
 						flexGrow={1}
 						horizontal='space-between'
 						breakpoints={{ 384: "column" }}>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='first price'
 							value='150 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='Second price'
 							value='120 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='Third price'
 							value='90 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='Forth price'
 							value='60 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='5-30'
 							value='30 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='31-100'
 							value='10 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='3 digits'
 							value='5 ether'
 						/>
-						<MiniCardComponent
+						<RewardCard
 							className={css(styles.miniCardContainer)}
 							title='2 digits'
 							value='1 ether'
@@ -102,7 +102,7 @@ export default class ContentComponent extends Component {
 					</Row>
 				</Row>
 				<div className={css(styles.todayTrends)}>
-					<TodayTrendsComponent />
+					<MainContent />
 				</div>
 				<Row
 					horizontal='space-between'

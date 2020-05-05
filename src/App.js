@@ -1,8 +1,8 @@
 import React from "react";
 import { Column, Row } from "simple-flexbox";
 import { StyleSheet, css } from "aphrodite";
-import HeaderComponent from "./components/header/HeaderComponent";
-import ContentComponent from "./components/content/ContentComponent";
+import HeaderSection from "./components/header/HeaderSection";
+import ContentContainer from "./components/content/ContentContainer";
 import "./App.css";
 
 const styles = StyleSheet.create({
@@ -37,9 +37,9 @@ class App extends React.Component {
 		return (
 			<Row className={css(styles.container)}>
 				<Column flexGrow={1} className={css(styles.mainBlock)}>
-					<HeaderComponent title={selectedItem} />
+					<HeaderSection title={selectedItem} />
 					<div className={css(styles.content)}>
-						<ContentComponent />
+						<ContentContainer />
 					</div>
 				</Column>
 			</Row>
