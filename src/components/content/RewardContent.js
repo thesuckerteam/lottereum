@@ -1,6 +1,6 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-import RewardCard from "./RewardCard";
+import RewardCard from "../cards/RewardCard";
 import { StyleSheet, css } from "aphrodite/no-important";
 
 const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default function HeaderContent() {
+export default function RewardContent() {
 	return (
 		<Row
 			className={css(styles.cardsContainer)}
