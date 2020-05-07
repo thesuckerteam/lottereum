@@ -116,6 +116,14 @@ export default class MainContent extends Component {
 		}
 	};
 
+	handleInputChange = (event) => {
+		const value = event.target.value;
+
+		if (!value || value.match(/^\d{1,}(\.\d{0,4})?$/)) {
+			this.setState(() => ({ value }));
+		}
+	};
+
 	handleOnSubmit = async (event) => {
 		event.preventDefault();
 		this.setState({ errorMessage: "" });
@@ -190,11 +198,12 @@ export default class MainContent extends Component {
 		const {
 			value,
 			isMetaMaskPluginAvailable,
+			isWarningAppended,
+			isLoading,
 			manager,
 			players,
 			balance,
 			balanceEther,
-			isLoading,
 		} = this.state;
 
 		console.log("Metamask: ", isMetaMaskPluginAvailable);
@@ -205,6 +214,9 @@ export default class MainContent extends Component {
 
 		return (
 			<Column>
+				{isWarningAppended && (
+					<div>Error please enable Metamask!</div>
+				)}
 				<RewardContent />
 				<div className={css(styles.todayTrends)}>
 					<Row
@@ -224,14 +236,7 @@ export default class MainContent extends Component {
 								<form>
 									<label>
 										Lottery Number:
-										<input
-											onChange={(event) =>
-												this.setState({
-													value: event.target.value.replace(/\D/, ""),
-												})
-											}
-											value={value}
-										/>
+										<input onChange={this.handleInputChange} value={value} />
 									</label>
 									<input
 										type='submit'
