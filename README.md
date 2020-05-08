@@ -1,10 +1,14 @@
-## Prerequisite Technologies In Your Machine
+# Lottereum
+
+An online automated lottery, free of middleman. With the technology of ethereum, no local currency are involved, every user uses the same currency.
+
+## Prerequisite
 
 - [Node 10.17.0](https://nodejs.org/en/)
 - [React](https://reactjs.org/)
 - [MetaMask](https://metamask.io/)
 
-### Metamask Plugin Installation
+## Metamask Plugin Installation
 
 Metamask is a pretty neat browser plugin. It allows an end user to interact with a dAPP on `ethethreum` network. With `metamask`, end user do not have to run a `ethereum node`. `Metamask` also handle users `Ethereum Wallet`.
 
@@ -14,7 +18,7 @@ Metamask is a pretty neat browser plugin. It allows an end user to interact with
 - Click `Add to Chrome` and confirm by `Add Extension`
 - Now `Metamask` should be available in your `Chrome Extension` list
 
-### Create Wallet
+## Create Wallet
 
 Using wallet, end users are allowed to send and receive ethers from dApps.
 
@@ -26,7 +30,7 @@ Using wallet, end users are allowed to send and receive ethers from dApps.
 - Now go to `Next Section`, select the words according to the phrase
 - Now your wallet is `All Set Up`, You should get your `Account Address`
 
-### Connect to `Rinkeby` network and get fake `Ether`
+## Connect to `Rinkeby` network and get fake `Ether`
 
 Tesnet like `Rinkeby`, does not deal with actual money. To deploy and make transaction in `ethereum testnet` we will require the fake ether.
 
@@ -42,7 +46,7 @@ Tesnet like `Rinkeby`, does not deal with actual money. To deploy and make trans
 - Now in your `Metamask`, `fake ether` should appear
 - Sometimes it takes a little more time to `transaction`, so wait and also make sure you `Metamask` is connected to the `Rinkeby` network.
 
-### Run and Simulate `Contract` through `Remix` Ide
+## Run and Simulate `Contract` through `Remix` Ide
 
 `Remix` is a online ide to create solidity smart contract. It also has feature to `compile`, `run`, `deploy` and `simulate` smart contracts.
 
@@ -59,7 +63,7 @@ Tesnet like `Rinkeby`, does not deal with actual money. To deploy and make trans
 - Go to `Deploy And Run Transaction` Tab and `Deploy` the contract in local `EVM`
 - Your contract functionality will be available in `Deploy And Run Tracsaction` tab, under the `Deployed Contract` section
 
-### Deploy the contract to `Rinkeby Network` through `Remix` Ide
+## Deploy the contract to `Rinkeby Network` through `Remix` Ide
 
 `Testnets` provide developers a place to kick the `smart contract` and `test` before the real assets being involved. These `Testnets` behave very much like the `main-net` and does not require actual money(`ether`). Here we are going to try `Rinkeby Testnet`.
 
