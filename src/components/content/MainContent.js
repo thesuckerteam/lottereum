@@ -6,12 +6,6 @@ import lottery from "../../config/lottery";
 import PlayerCard from "../cards/PlayerCard";
 import RewardContent from "./RewardContent";
 
-const data = [];
-
-for (let x = 1; x <= 24; x++) {
-	data.push({ x: x, y: Math.floor(Math.random() * 100) });
-}
-
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#FFFFFF",

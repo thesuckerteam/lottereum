@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
 	},
 	cardRow: {
 		marginTop: 30,
+		marginBottom: 20,
 		"@media (max-width: 768px)": {
 			marginTop: 0,
 		},

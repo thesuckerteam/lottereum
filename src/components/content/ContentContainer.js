@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 		minHeight: "100vh",
 	},
 	content: {
-		marginTop: 54,
+		marginTop: 20,
 	},
 	mainBlock: {
 		backgroundColor: "#F7F8FC",
@@ -23,7 +23,6 @@ export default class ContentContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedItem: "Tickets",
 			message: "",
 			isTransactionIsRunning: false,
 		};
@@ -53,21 +52,23 @@ export default class ContentContainer extends Component {
 	resize = () => this.forceUpdate();
 
 	render() {
-		const { selectedItem, message, isTransactionIsRunning } = this.state;
+		const { message, isTransactionIsRunning } = this.state;
 		return (
-			<LoadingOverlay active={isTransactionIsRunning} spinner text={message}>
-				<Row className={css(styles.container)}>
-					<Column flexGrow={1} className={css(styles.mainBlock)}>
-						<HeaderSection title={selectedItem} />
-						<div className={css(styles.content)}>
-							<MainContent
-								onLoading={this.handleLoading}
-								onClose={this.handleClose}
-							/>
-						</div>
-					</Column>
-				</Row>
-			</LoadingOverlay>
+			<>
+				<HeaderSection />
+				<LoadingOverlay active={isTransactionIsRunning} spinner text={message}>
+					<Row className={css(styles.container)}>
+						<Column flexGrow={1} className={css(styles.mainBlock)}>
+							<div className={css(styles.content)}>
+								<MainContent
+									onLoading={this.handleLoading}
+									onClose={this.handleClose}
+								/>
+							</div>
+						</Column>
+					</Row>
+				</LoadingOverlay>
+			</>
 		);
 	}
 }
