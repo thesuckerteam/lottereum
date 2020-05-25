@@ -40,43 +40,8 @@ export default function RewardContent() {
 				breakpoints={{ 384: "column" }}>
 				<RewardCard
 					className={css(styles.miniCardContainer)}
-					title='first price'
+					title='Total price'
 					value='150 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='Second price'
-					value='120 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='Third price'
-					value='90 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='Forth price'
-					value='60 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='5-30'
-					value='30 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='31-100'
-					value='10 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='3 digits'
-					value='5 ether'
-				/>
-				<RewardCard
-					className={css(styles.miniCardContainer)}
-					title='2 digits'
-					value='1 ether'
 				/>
 			</Row>
 		</Row>
