@@ -199,7 +199,7 @@ export default class MainContent extends Component {
 							<h1>
 								<form>
 									<label>
-										Lottery Number:
+										Lottery Amount:
 										<input onChange={this.handleInputChange} value={value} />
 									</label>
 									<input
