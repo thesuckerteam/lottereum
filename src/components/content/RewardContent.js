@@ -7,10 +7,13 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		marginRight: -30,
 		marginTop: -30,
+		
 	},
 	cardRow: {
 		marginTop: 30,
 		marginBottom: 20,
+		justifyContent: 'center',
+		alignItems:'center',
 		"@media (max-width: 768px)": {
 			marginTop: 0,
 		},
@@ -31,7 +34,7 @@ export default function RewardContent(props) {
 			className={css(styles.cardsContainer)}
 			wrap
 			flexGrow={1}
-			horizontal='space-between'
+			horizontal=''
 			justifyContent='center'
 			alignItems='center'
 			breakpoints={{ 768: "column" }}>
@@ -39,7 +42,7 @@ export default function RewardContent(props) {
 				className={css(styles.cardRow)}
 				wrap
 				flexGrow={1}
-				horizontal='space-between'
+				horizontal=''
 				breakpoints={{ 384: "column" }}>
 				<RewardCard
 					className={css(styles.miniCardContainer)}

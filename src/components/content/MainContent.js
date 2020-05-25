@@ -182,6 +182,7 @@ export default class MainContent extends Component {
 						breakpoints={{ 1024: "column" }}>
 						<Column
 							wrap
+							alignItems= 'center'
 							flexGrow={7}
 							flexBasis='735px'
 							className={css(styles.graphSection)}
@@ -225,6 +226,7 @@ export default class MainContent extends Component {
 				</div>
 				<Row
 					horizontal='space-between'
+					alignItems='center'
 					className={css(styles.lastRow)}
 					breakpoints={{ 1024: "column" }}></Row>
 			</Column>
