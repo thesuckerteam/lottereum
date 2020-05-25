@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		marginRight: -30,
 		marginTop: -30,
+		marginBottom: -20
 		
 	},
 	cardRow: {
@@ -51,5 +52,6 @@ export default function RewardContent(props) {
 				/>
 			</Row>
 		</Row>
+		
 	);
 }
