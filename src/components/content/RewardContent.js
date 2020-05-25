@@ -24,13 +24,15 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default function RewardContent() {
+export default function RewardContent(props) {
 	return (
 		<Row
 			className={css(styles.cardsContainer)}
 			wrap
 			flexGrow={1}
 			horizontal='space-between'
+			justifyContent='center'
+			alignItems='center'
 			breakpoints={{ 768: "column" }}>
 			<Row
 				className={css(styles.cardRow)}
@@ -40,8 +42,8 @@ export default function RewardContent() {
 				breakpoints={{ 384: "column" }}>
 				<RewardCard
 					className={css(styles.miniCardContainer)}
-					title='Total price'
-					value='150 ether'
+					title='Total Price ( Ether )'
+					value={props.balanceEther}
 				/>
 			</Row>
 		</Row>

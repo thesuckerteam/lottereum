@@ -178,10 +178,8 @@ export default class MainContent extends Component {
 
 		return (
 			<Column>
-				{isWarningAppended && (
-					<div>Error please enable Metamask!</div>
-				)}
-				<RewardContent />
+				{isWarningAppended && <div>Error please enable Metamask!</div>}
+				<RewardContent balanceEther={balanceEther} />
 				<div className={css(styles.todayTrends)}>
 					<Row
 						flexGrow={1}
@@ -212,7 +210,6 @@ export default class MainContent extends Component {
 										value='Pick A Winner'
 										onClick={this.handleOnPickWinner}
 									/>
-									<div>Total price: {this.state.balanceEther}</div>
 								</form>
 							</h1>
 						</Column>
