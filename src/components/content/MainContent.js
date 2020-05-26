@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
 	playerContain: {
 		fontFamily: "Trebuchet MS",
 		overflowX: "auto",
-		height: 350,
 		width: "500px",
 		float: "left",
 		position: "relative",
