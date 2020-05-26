@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: "#9FA2B4",
-		fontFamily: "Muli",
+		fontFamily: "Trebuchet MS",
 		fontStyle: "normal",
 		fontWeight: "bold",
 		fontSize: 19,
