@@ -5,7 +5,7 @@ import web3 from "../../config/web3";
 import lottery from "../../config/lottery";
 import PlayerCard from "../cards/PlayerCard";
 import RewardContent from "./RewardContent";
-
+import lotto from "../../images/lottery_pic.png";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   graphSection: {
-    padding: 24,
+	padding: "10px 10px 10px 10px"
   },
   separator: {
     backgroundColor: "#DFE0EB",
@@ -30,56 +30,72 @@ const styles = StyleSheet.create({
     overflowX: "scroll",
   },
   todayTrends: {
-    marginTop: 30,
+    marginTop: 5,
   },
   lastRow: {
     marginTop: 30,
   },
   input2: {
     marginLeft: 10,
-    backgroundColor: "#90EE90",
-	borderRadius: 5,
-	opacity: 0.7,
-	transition: 0.3,
-	display: 'inline-block',
-	cursor: 'pointer',
-	textDecoration: 'none',
-	':hover' :{opacity: 1}
+    marginTop: -10,
+    padding: "5px 10px 5px 10px",
+    fontFamily: "Trebuchet MS",
+    fontSize: 15,
+    color: "#fff",
+    fontWeight: 700,
+    backgroundColor: "#00AD5F",
+    borderRadius: 5,
+    opacity: 0.7,
+    transition: 0.3,
+    display: "inline-block",
+    cursor: "pointer",
+    textDecoration: "none",
+    ":hover": { opacity: 1 },
   },
   input1: {
     marginLeft: 10,
-	backgroundColor: "#9fa2b4",
-	borderRadius: 5,
-	opacity: 0.7,
-	transition: 0.3,
-	display: 'inline-block',
-	cursor: 'pointer',
-	textDecoration: 'none',
-	':hover' :{opacity: 1}
+    fontFamily: "Trebuchet MS",
+    padding: "5px 10px 5px 10px",
+    fontSize: 15,
+    color: "#fff",
+    fontWeight: 700,
+    backgroundColor: "#00AD5F",
+    borderRadius: 5,
+    opacity: 0.7,
+    transition: 0.3,
+    display: "inline-block",
+    cursor: "pointer",
+    textDecoration: "none",
+    ":hover": { opacity: 1 },
   },
   whiteInput: {
-	marginLeft: 10,
+    fontFamily: "Trebuchet MS",
+    marginLeft: 10,
     transition: "all 0.2s",
+    fontSize: 15,
+    padding: "5px 0px 5px 10px",
 
     ":hover": {
-      background: "#efefef"
-	},
-	
+      background: "#efefef",
+    },
   },
-  
+
   playerContain: {
     overflowX: "auto",
     height: 350,
     width: "500px",
     float: "left",
-	position: "relative",
-	
+    position: "relative",
   },
   rowContain: {
     justifyContent: "center",
     alignItems: "center",
   },
-  
+  imageSet:{
+	  bottom: 0,
+	  width: "100%", 
+	  height: 280
+  }
 });
 
 export default class MainContent extends Component {
@@ -225,24 +241,25 @@ export default class MainContent extends Component {
         {isWarningAppended && <div>Error please enable Metamask!</div>}
         <RewardContent balanceEther={balanceEther} />
         <div className={css(styles.todayTrends)}>
-		  <Row
+          <Row
             flexGrow={1}
             horizontal=""
             justifyContent="center"
             alignItems="center"
           >
-		  Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined here
+            Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined
+            here
           </Row>
           <Row
-			flexGrow={1}
+            flexGrow={1}
             horizontal=""
             justifyContent="center"
             alignItems="center"
           >
-            The contract is managed by {manager} <br></br>	
+            The contract is managed by {manager} <br></br>
           </Row>
           <Row
-			flexGrow={1}
+            flexGrow={1}
             className={css(styles.container)}
             horizontal="center"
             breakpoints={{ 1024: "column" }}
@@ -257,30 +274,28 @@ export default class MainContent extends Component {
                 1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
               }}
             >
-              <form>
-                <label>
-				
-                  Lottery Amount:
+              <h2>
+                <form>
+                  <label>
+                    Lottery Amount:
+                    <input
+                      className={css(styles.whiteInput)}
+                      onChange={this.handleInputChange}
+                      placeholder="Example: 0.1"
+                      value={value}
+                    />
+                  </label>
                   <input
-                    className={css(styles.whiteInput)}
-					onChange={this.handleInputChange}
-					placeholder="Example: 0.1"
-                    value={value}
+                    className={css(styles.input1)}
+                    type="submit"
+                    value="Submit"
+                    onClick={this.handleOnSubmit}
                   />
-                </label>
-                <input
-                  className={css(styles.input1)}
-                  type="submit"
-                  value="Submit"
-                  onClick={this.handleOnSubmit}
-                />
-                <input
-                  className={css(styles.input2)}
-                  type="submit"
-                  value="Pick A Winner"
-                  onClick={this.handleOnPickWinner}
-                />
-              </form>
+                </form>
+              </h2>
+			<img 
+			className={css(styles.imageSet)}
+			src={lotto}/>
             </Column>
             <Column
               className={css(styles.separator)}
@@ -307,6 +322,19 @@ export default class MainContent extends Component {
           className={css(styles.lastRow)}
           breakpoints={{ 1024: "column" }}
         ></Row>
+        <Row
+          flexGrow={1}
+          horizontal=""
+          justifyContent="center"
+          alignItems="center"
+        >
+          <input
+            className={css(styles.input2)}
+            type="submit"
+            value="Pick A Winner"
+            onClick={this.handleOnPickWinner}
+          />
+        </Row>
       </Column>
     );
   }
