@@ -5,13 +5,14 @@ import { StyleSheet, css } from "aphrodite/no-important";
 
 const styles = StyleSheet.create({
 	cardsContainer: {
+		fontFamily: "Trebuchet MS",
 		marginRight: -30,
 		marginTop: -30,
 		marginBottom: -20
 		
 	},
 	cardRow: {
-		marginTop: 30,
+		marginTop: 10,
 		marginBottom: 20,
 		justifyContent: 'center',
 		alignItems:'center',

@@ -32,11 +32,10 @@ const styles = StyleSheet.create({
 	lastRow: {
 		marginTop: 30,
 	},
-	input2: {
+	pickWinnerButton: {
 		marginLeft: 10,
 		marginTop: -10,
 		padding: "5px 10px 5px 10px",
-		fontFamily: "Trebuchet MS",
 		fontSize: 15,
 		color: "#fff",
 		fontWeight: 700,
@@ -49,9 +48,8 @@ const styles = StyleSheet.create({
 		textDecoration: "none",
 		":hover": { opacity: 1 },
 	},
-	input1: {
+	submitButton: {
 		marginLeft: 10,
-		fontFamily: "Trebuchet MS",
 		padding: "5px 10px 5px 10px",
 		fontSize: 15,
 		color: "#fff",
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
 		":hover": { opacity: 1 },
 	},
 	whiteInput: {
-		fontFamily: "Trebuchet MS",
 		marginLeft: 10,
 		transition: "all 0.2s",
 		fontSize: 15,
@@ -78,6 +75,7 @@ const styles = StyleSheet.create({
 	},
 
 	playerContain: {
+		fontFamily: "Trebuchet MS",
 		overflowX: "auto",
 		height: 350,
 		width: "500px",
@@ -94,6 +92,13 @@ const styles = StyleSheet.create({
 		height: 280,
 		objectFit: "cover",
 	},
+	mentionManager: {
+		color: 'red'
+	},
+	fontForm: {
+		fontFamily: "Trebuchet MS",
+
+	}
 });
 
 export default class MainContent extends Component {
@@ -243,7 +248,7 @@ export default class MainContent extends Component {
 		console.log("BalanceEther: ", balanceEther);
 
 		return (
-			<Column>
+			<Column className={css(styles.fontForm)}>
 				{isWarningAppended && <div>Error please enable Metamask!</div>}
 				<RewardContent balanceEther={balanceEther} />
 				<Row flexGrow={1} justifyContent='center' alignItems='center'>
@@ -278,7 +283,7 @@ export default class MainContent extends Component {
 									/>
 								</label>
 								<input
-									className={css(styles.input1)}
+									className={css(styles.submitButton)}
 									type='submit'
 									value='Submit'
 									onClick={this.handleOnSubmit}
@@ -312,12 +317,19 @@ export default class MainContent extends Component {
 					className={css(styles.lastRow)}
 					breakpoints={{ 1024: "column" }}></Row>
 				<Row
+					className={css(styles.mentionManager)}
 					flexGrow={1}
-					horizontal=''
+					justifyContent='center'
+					alignItems='center'>
+					(Only For Contract Manager)
+				</Row>
+				<br></br>
+				<Row
+					flexGrow={1}
 					justifyContent='center'
 					alignItems='center'>
 					<input
-						className={css(styles.input2)}
+						className={css(styles.pickWinnerButton)}
 						type='submit'
 						value='Pick A Winner'
 						onClick={this.handleOnPickWinner}
