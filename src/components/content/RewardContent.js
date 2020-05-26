@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 	},
 	miniCardContainer: {
 		flexGrow: 1,
+		fontFamily: "Trebuchet MS",
 		marginRight: 30,
 		"@media (max-width: 768px)": {
 			marginTop: 30,
@@ -48,6 +49,7 @@ export default function RewardContent(props) {
 				breakpoints={{ 384: "column" }}>
 				<RewardCard
 					className={css(styles.miniCardContainer)}
+					fontFamily="Trebuchet MS"
 					title='Total Price ( Ether )'
 					value={props.balanceEther}
 				/>

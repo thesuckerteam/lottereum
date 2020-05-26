@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		},
 	},
 	statTitle: {
-		fontFamily: "Muli",
+		fontFamily: "Trebuchet MS",
 		fontStyle: "normal",
 		fontWeight: "600",
 		fontSize: 16,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 		marginBottom: 6,
 	},
 	statValue: {
-		fontFamily: "Muli",
+		fontFamily: "Trebuchet MS",
 		fontStyle: "normal",
 		fontWeight: "bold",
 		fontSize: 24,
