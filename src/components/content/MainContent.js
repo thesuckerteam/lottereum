@@ -38,27 +38,42 @@ const styles = StyleSheet.create({
   input2: {
     marginLeft: 10,
     backgroundColor: "#90EE90",
-    borderRadius: 5,
+	borderRadius: 5,
+	opacity: 0.7,
+	transition: 0.3,
+	display: 'inline-block',
+	cursor: 'pointer',
+	textDecoration: 'none',
+	':hover' :{opacity: 1}
   },
   input1: {
     marginLeft: 10,
-    borderRadius: 5,
+	backgroundColor: "#9fa2b4",
+	borderRadius: 5,
+	opacity: 0.7,
+	transition: 0.3,
+	display: 'inline-block',
+	cursor: 'pointer',
+	textDecoration: 'none',
+	':hover' :{opacity: 1}
   },
   whiteInput: {
     marginLeft: 10,
-    borderRadius: 5,
+	borderRadius: 5,
   },
   playerContain: {
     overflowX: "auto",
     height: 350,
     width: "500px",
     float: "left",
-    position: "relative",
+	position: "relative",
+	
   },
   rowContain: {
     justifyContent: "center",
     alignItems: "center",
   },
+  
 });
 
 export default class MainContent extends Component {
@@ -236,8 +251,9 @@ export default class MainContent extends Component {
                 1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
               }}
             >
-              <form>
+              <form class="w3-panel w3-border w3-hover-border-red">
                 <label>
+				
                   Lottery Amount:
                   <input
                     className={css(styles.whiteInput)}
