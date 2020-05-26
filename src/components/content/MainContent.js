@@ -29,9 +29,6 @@ const styles = StyleSheet.create({
 		height: 200,
 		overflowX: "scroll",
 	},
-	todayTrends: {
-		marginTop: 5,
-	},
 	lastRow: {
 		marginTop: 30,
 	},
@@ -204,7 +201,6 @@ export default class MainContent extends Component {
 	};
 
 	metaMaskNotAvailable = () => {
-		this.metaMaskNotAvailable();
 		this.setState({
 			isWarningAppended: true,
 		});
@@ -242,74 +238,69 @@ export default class MainContent extends Component {
 			<Column>
 				{isWarningAppended && <div>Error please enable Metamask!</div>}
 				<RewardContent balanceEther={balanceEther} />
-				<div className={css(styles.todayTrends)}>
-					<Row
-						flexGrow={1}
-						horizontal=''
-						justifyContent='center'
-						alignItems='center'>
-						Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined
-						here
-					</Row>
-					<Row
-						flexGrow={1}
-						horizontal=''
-						justifyContent='center'
-						alignItems='center'>
-						The contract is managed by {manager} <br></br>
-					</Row>
-					<Row
-						flexGrow={1}
-						className={css(styles.container)}
-						horizontal='center'
-						breakpoints={{ 1024: "column" }}>
-						<Column
-							wrap
-							alignItems='center'
-							flexGrow={7}
-							flexBasis='735px'
-							className={css(styles.graphSection)}
-							breakpoints={{
-								1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
-							}}>
-							<h2>
-								<form>
-									<label>
-										Lottery Amount:
-										<input
-											className={css(styles.whiteInput)}
-											onChange={this.handleInputChange}
-											placeholder='Example: 0.1'
-											value={value}
-										/>
-									</label>
+				<Row
+					flexGrow={1}
+					justifyContent='center'
+					alignItems='center'>
+					Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined here
+				</Row>
+				<Row
+					flexGrow={1}
+					justifyContent='center'
+					alignItems='center'>
+					The contract is managed by {manager}
+				</Row>
+				<Row
+					flexGrow={1}
+					className={css(styles.container)}
+					horizontal='center'
+					breakpoints={{ 1024: "column" }}>
+					<Column
+						wrap
+						alignItems='center'
+						flexGrow={7}
+						flexBasis='735px'
+						className={css(styles.graphSection)}
+						breakpoints={{
+							1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
+						}}>
+						<h2>
+							<form>
+								<label>
+									Lottery Amount:
 									<input
-										className={css(styles.input1)}
-										type='submit'
-										value='Submit'
-										onClick={this.handleOnSubmit}
+										className={css(styles.whiteInput)}
+										onChange={this.handleInputChange}
+										placeholder='Example: 0.1'
+										value={value}
 									/>
-								</form>
-							</h2>
-							<img className={css(styles.imageSet)} src={lotto} />
-						</Column>
-						<Column
-							className={css(styles.separator)}
-							breakpoints={{ 1024: { display: "none" } }}>
-							<div />
-						</Column>
-						<Column
-							className={css(styles.playerContain)}
-							flexGrow={3}
-							flexBasis='342px'
-							breakpoints={{ 1024: css(styles.stats) }}>
-							{isLoading ||
-								players.map((address, index) => (
-									<PlayerCard number={index + 1} address={address} />
-								))}
-						</Column>
-					</Row>
-				</div>
+								</label>
+								<input
+									className={css(styles.input1)}
+									type='submit'
+									value='Submit'
+									onClick={this.handleOnSubmit}
+								/>
+							</form>
+						</h2>
+						<img className={css(styles.imageSet)} src={lotto} />
+					</Column>
+					<Column
+						className={css(styles.separator)}
+						breakpoints={{ 1024: { display: "none" } }}>
+						<div />
+					</Column>
+					<Column
+						className={css(styles.playerContain)}
+						flexGrow={3}
+						flexBasis='342px'
+						breakpoints={{ 1024: css(styles.stats) }}>
+						{isLoading ||
+							players.map((address, index) => (
+								<PlayerCard number={index + 1} address={address} />
+							))}
+					</Column>
+				</Row>
 				<Row
 					horizontal='space-between'
 					alignItems='center'
