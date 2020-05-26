@@ -157,11 +157,10 @@ export default class MainContent extends Component {
 			return this.metaMaskNotAvailable();
 		}
 
-		this.props.onLoading();
-
 		try {
 			await window.ethereum.enable();
 			const accounts = await web3.eth.getAccounts();
+			this.props.onLoading();
 			await lottery.methods.enter().send({
 				from: accounts[0],
 				value: web3.utils.toWei(value, "ether"),
@@ -188,11 +187,10 @@ export default class MainContent extends Component {
 			return this.metaMaskNotAvailable();
 		}
 
-		this.props.onLoading();
-
 		try {
 			await window.ethereum.enable();
 			const accounts = await web3.eth.getAccounts();
+			this.props.onLoading();
 			await lottery.methods.pickWinner().send({
 				from: accounts[0],
 			});
