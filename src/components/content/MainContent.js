@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		cursor: "pointer",
 		marginTop: 15,
+		boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 	},
 	graphSection: {
 		padding: "10px 10px 10px 10px",
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 		overflowX: "scroll",
 	},
 	lastRow: {
-		marginTop: 30,
+		marginTop: 50,
 	},
 	pickWinnerButton: {
 		marginLeft: 10,
@@ -99,6 +100,9 @@ const styles = StyleSheet.create({
 	},
 	textContainer: {
 		margin: "20px",
+		fontSize: 20,
+	},
+	noPlayerText: {
 		fontSize: 20,
 	}
 });
@@ -310,7 +314,7 @@ export default class MainContent extends Component {
 						alignItems='center'
 						breakpoints={{ 1024: css(styles.stats) }}>
 						{players.length === 0
-							? "There is no players"
+							? <div className={css(styles.noPlayerText)}>There is no players</div>
 							: players.map((address, index) => (
 									<PlayerCard number={index + 1} address={address} />
 							  ))}

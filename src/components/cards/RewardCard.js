@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
 		height: 70,
 		maxWidth: 350,
 		padding: "24px 32px 24px 32px",
+		boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 		":hover": {
 			borderColor: "#ffa500",
 			":nth-child(n) > span": {
