@@ -58,8 +58,13 @@ const styles = StyleSheet.create({
 	':hover' :{opacity: 1}
   },
   whiteInput: {
-    marginLeft: 10,
-	borderRadius: 5,
+	marginLeft: 10,
+    transition: "all 0.2s",
+
+    ":hover": {
+      background: "#efefef"
+    },
+
   },
   playerContain: {
     overflowX: "auto",
@@ -251,7 +256,7 @@ export default class MainContent extends Component {
                 1024: { width: "calc(100% - 48px)", flexBasis: "auto" },
               }}
             >
-              <form class="w3-panel w3-border w3-hover-border-red">
+              <form>
                 <label>
 				
                   Lottery Amount:
