@@ -92,9 +92,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageSet:{
-	  bottom: 0,
-	  width: "100%", 
-	  height: 280
+	bottom: 0,
+	width: '100%',
+	height: 280,
+	objectFit: 'cover'
+	  
   }
 });
 
@@ -293,7 +295,7 @@ export default class MainContent extends Component {
                   />
                 </form>
               </h2>
-			<img 
+			<img
 			className={css(styles.imageSet)}
 			src={lotto}/>
             </Column>
