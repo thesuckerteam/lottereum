@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
 	},
 	playerContain: {
 		fontFamily: "Trebuchet MS",
-		overflowX: "auto",
-		width: "500px",
 		float: "left",
 		position: "relative",
 	},
@@ -174,7 +172,6 @@ export default class MainContent extends Component {
 				from: accounts[0],
 				value: web3.utils.toWei(value, "ether"),
 			});
-			this.updateContractInfo();
 			this.setState({
 				value: "",
 			});
