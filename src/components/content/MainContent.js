@@ -108,14 +108,12 @@ export default class MainContent extends Component {
 			isMetaMaskPluginAvailable: false,
 			isWarningAppended: false,
 			errorMessage: "",
-			isLoading: true,
 		};
 	}
 
 	async componentDidMount() {
 		const isMetaMaskPluginAvailable = web3 && lottery;
-		this.setState({ isMetaMaskPluginAvailable, isLoading: true });
-		console.log("Account: ", await web3.eth.getAccounts());
+		this.setState({ isMetaMaskPluginAvailable });
 		this.updateContractInfo();
 	}
 
@@ -130,7 +128,6 @@ export default class MainContent extends Component {
 				players,
 				balance: balanceWei,
 				balanceEther,
-				isLoading: false,
 			});
 		} catch (error) {
 			alert(error);
@@ -156,6 +153,11 @@ export default class MainContent extends Component {
 
 		try {
 			await window.ethereum.enable();
+		} catch (error) {
+			this.setState({ isWarningAppended: true });
+		}
+
+		try {
 			const accounts = await web3.eth.getAccounts();
 			this.props.onLoading();
 			await lottery.methods.enter().send({
@@ -169,16 +171,14 @@ export default class MainContent extends Component {
 		} catch (error) {
 			this.setState({
 				errorMessage: error.message,
-				isWarningAppended: true,
 			});
 		}
+		this.updateContractInfo();
 		this.props.onClose();
-		this.setState({ isLoading: false });
 	};
 
 	handleOnPickWinner = async (event) => {
 		event.preventDefault();
-
 		const { isMetaMaskPluginAvailable, balanceEther } = this.state;
 		if (!isMetaMaskPluginAvailable) {
 			return this.metaMaskNotAvailable();
@@ -186,16 +186,25 @@ export default class MainContent extends Component {
 
 		try {
 			await window.ethereum.enable();
+		} catch (error) {
+			this.setState({ isWarningAppended: true });
+		}
+
+		try {
 			const accounts = await web3.eth.getAccounts();
 			this.props.onLoading();
 			await lottery.methods.pickWinner().send({
 				from: accounts[0],
 			});
 		} catch (error) {
-			this.setState({ isWarningAppended: true });
+			this.setState({
+				errorMessage: error.message,
+			});
 		}
+
 		const winner = await lottery.methods.winner().call();
 		alert(`The winner is ${winner}, wins ${balanceEther} ether`);
+		this.updateContractInfo();
 		this.props.onClose();
 		this.setState({ balanceEther: 0 });
 	};
@@ -221,7 +230,6 @@ export default class MainContent extends Component {
 			value,
 			isMetaMaskPluginAvailable,
 			isWarningAppended,
-			isLoading,
 			manager,
 			players,
 			balance,
@@ -238,16 +246,10 @@ export default class MainContent extends Component {
 			<Column>
 				{isWarningAppended && <div>Error please enable Metamask!</div>}
 				<RewardContent balanceEther={balanceEther} />
-				<Row
-					flexGrow={1}
-					justifyContent='center'
-					alignItems='center'>
+				<Row flexGrow={1} justifyContent='center' alignItems='center'>
 					Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined here
 				</Row>
-				<Row
-					flexGrow={1}
-					justifyContent='center'
-					alignItems='center'>
+				<Row flexGrow={1} justifyContent='center' alignItems='center'>
 					The contract is managed by {manager}
 				</Row>
 				<Row
@@ -294,11 +296,14 @@ export default class MainContent extends Component {
 						className={css(styles.playerContain)}
 						flexGrow={3}
 						flexBasis='342px'
+						justifyContent='center'
+						alignItems='center'
 						breakpoints={{ 1024: css(styles.stats) }}>
-						{isLoading ||
-							players.map((address, index) => (
-								<PlayerCard number={index + 1} address={address} />
-							))}
+						{players.length === 0
+							? "There is no players"
+							: players.map((address, index) => (
+									<PlayerCard number={index + 1} address={address} />
+							  ))}
 					</Column>
 				</Row>
 				<Row
