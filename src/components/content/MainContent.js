@@ -63,9 +63,10 @@ const styles = StyleSheet.create({
 
     ":hover": {
       background: "#efefef"
-    },
-
+	},
+	
   },
+  
   playerContain: {
     overflowX: "auto",
     height: 350,
@@ -262,7 +263,8 @@ export default class MainContent extends Component {
                   Lottery Amount:
                   <input
                     className={css(styles.whiteInput)}
-                    onChange={this.handleInputChange}
+					onChange={this.handleInputChange}
+					placeholder="Example: 0.1"
                     value={value}
                   />
                 </label>
