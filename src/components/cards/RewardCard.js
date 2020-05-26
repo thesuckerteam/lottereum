@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
 		maxWidth: 350,
 		padding: "24px 32px 24px 32px",
 		":hover": {
-			borderColor: "#3751FF",
+			borderColor: "#ffa500",
 			":nth-child(n) > span": {
-				color: "#3751FF",
+				color: "#ffa500",
 			},
 		},
 	},

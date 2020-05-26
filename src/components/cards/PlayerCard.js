@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Trebuchet MS",
 		fontStyle: "normal",
 		fontWeight: "600",
-		fontSize: 16,
+		fontSize: 18,
 		lineHeight: "22px",
 		letterSpacing: "0.3px",
 		textAlign: "center",

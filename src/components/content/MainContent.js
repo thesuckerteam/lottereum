@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
 			background: "#efefef",
 		},
 	},
-
 	playerContain: {
 		fontFamily: "Trebuchet MS",
 		overflowX: "auto",
@@ -90,13 +89,17 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: 280,
 		objectFit: "cover",
+		opacity: 0.2,
 	},
 	mentionManager: {
-		color: 'red'
+		color: "red",
 	},
 	fontForm: {
 		fontFamily: "Trebuchet MS",
-
+	},
+	textContainer: {
+		margin: "20px",
+		fontSize: 20,
 	}
 });
 
@@ -250,12 +253,15 @@ export default class MainContent extends Component {
 			<Column className={css(styles.fontForm)}>
 				{isWarningAppended && <div>Error please enable Metamask!</div>}
 				<RewardContent balanceEther={balanceEther} />
-				<Row flexGrow={1} justifyContent='center' alignItems='center'>
-					Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined here
-				</Row>
-				<Row flexGrow={1} justifyContent='center' alignItems='center'>
-					The contract is managed by {manager}
-				</Row>
+				<div className={css(styles.textContainer)}>
+					<Row flexGrow={1} justifyContent='center' alignItems='center'>
+						Total&nbsp;<h3>{players.length}</h3>&nbsp;players already joined
+						here
+					</Row>
+					<Row flexGrow={1} justifyContent='center' alignItems='center'>
+						The contract is managed by &nbsp;<b>{manager}</b>&nbsp;
+					</Row>
+				</div>
 				<Row
 					flexGrow={1}
 					className={css(styles.container)}
@@ -323,10 +329,7 @@ export default class MainContent extends Component {
 					(Only For Contract Manager)
 				</Row>
 				<br></br>
-				<Row
-					flexGrow={1}
-					justifyContent='center'
-					alignItems='center'>
+				<Row flexGrow={1} justifyContent='center' alignItems='center'>
 					<input
 						className={css(styles.pickWinnerButton)}
 						type='submit'
